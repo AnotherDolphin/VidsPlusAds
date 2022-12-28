@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel ./../src/VidsPlusAds.tsx index.html",
+    "start": "parcel ./../src/index.tsx index.html",
     "build": "parcel build index.html"
   },
   "dependencies": {

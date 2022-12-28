@@ -47,10 +47,12 @@ function VidsPlusAds(props: Props) {
     },
   }
 
+  const configs = { adFrequency: props.adFrequency, preroll: props.preroll }
+
   return (
     <div>
       <AdStateProvider>
-        <VideoAdManager {...{ videoProps, adProps }} />
+        <VideoAdManager {...{ videoProps, adProps, configs }} />
       </AdStateProvider>
     </div>
   )

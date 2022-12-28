@@ -9,14 +9,18 @@ import VideoJS from './VideoJS'
 interface Props {
   videoProps: VideoProps
   adProps: VideoProps
+  configs: {
+    preroll?: boolean
+    adFrequency: number
+  }
 }
 
-const VideoAdManager = ({ videoProps, adProps }: Props) => {
+const VideoAdManager = ({ videoProps, adProps, configs }: Props) => {
   const videoRef = useRef<VideoJsPlayer | null>(null)
   const adRef = useRef<VideoJsPlayer | null>(null)
   const [currentTime, setCurrentTime] = useState(-1)
-  const [rerunWindow, setRerunWindow] = useState(3000)
-  const [adPreroll, setAdPreroll] = useState(true)
+  const [rerunWindow, setRerunWindow] = useState(configs.adFrequency)
+  const [adPreroll, setAdPreroll] = useState(configs.preroll?? true)
   const { adState, dispatchAdState } = useContext(AdStateContext)
 
   const videoPlayerReady = (player: VideoJsPlayer) => {
@@ -59,15 +63,14 @@ const VideoAdManager = ({ videoProps, adProps }: Props) => {
   }
 
   useEffect(() => {
-    console.log(adState)
-
+    if (currentTime == -1) return
     switch (adState.lastEvent) {
       case AdEvents.DidNotPlay:
-        if (currentTime > -1 && adPreroll) {
+        if (adPreroll) {
           videoRef.current?.pause()
           dispatchAdState(AdEvents.Playing)
         } else if (!adPreroll)
-          setTimeout(function() {
+          setTimeout(() => {
             dispatchAdState(AdEvents.Playing)
           }, rerunWindow)
         break
