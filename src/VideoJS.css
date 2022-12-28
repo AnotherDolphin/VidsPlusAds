@@ -1,0 +1,51 @@
+.vjs-matrix.video-js {
+  position: relative;
+}
+
+.screen {
+  position: relative;
+}
+
+.ad {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.rerun-input {
+  font-size: 4rem;
+}
+/* .ad sibling */
+
+.settings {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.playing-ad {
+  background: #7775;
+  border-radius: 5px;
+  margin: auto;
+  top: 5px;
+  left: 5px;
+  color: white;
+  font-size: 1rem;
+  padding: 1rem;
+  position: absolute;
+}
+
+.ad .skip-ad {
+  background: #777a;
+  border-radius: 5px 0 0 5px;
+  margin: auto;
+  bottom: 1rem;
+  right: 0px;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  position: absolute;
+}
