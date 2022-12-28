@@ -38,7 +38,7 @@ const adSource =
 
 #### Pass props and call component
 
-```typescript
+```tsx
 <VidsPlusAds {...{ adFrequency, videoSource, adSource }} />
 ```
 
