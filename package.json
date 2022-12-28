@@ -1,11 +1,17 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
+  ],
+  "keywords": [
+    "videos",
+    "video player",
+    "video ads",
+    "ad plugin"
   ],
   "engines": {
     "node": ">=10"
@@ -36,6 +42,10 @@
   "name": "vids-plus-ads",
   "author": "Abdullah Nayer",
   "module": "dist/vid-n-ads-lib.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnotherDolphin/VidsPlusAds"
+  },
   "size-limit": [
     {
       "path": "dist/vid-n-ads-lib.cjs.production.min.js",
