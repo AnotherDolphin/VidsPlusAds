@@ -1,5 +1,5 @@
 {
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -24,6 +24,9 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why"
+  },
+  "dependencies": {
+    "video.js": "^7.20.3"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -69,7 +72,6 @@
     "size-limit": "^8.1.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.4.1",
-    "typescript": "^3.9.10",
-    "video.js": "^7.20.3"
+    "typescript": "^3.9.10"
   }
 }
