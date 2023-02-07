@@ -1,5 +1,3 @@
-// tsdx.config.js
-
 const postcss = require('rollup-plugin-postcss');
 
 module.exports = {

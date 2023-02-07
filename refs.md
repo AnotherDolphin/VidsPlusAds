@@ -1,0 +1,1 @@
+tsdx package [ref](https://dev.to/g_abud/publish-a-typescript-package-in-under-10-minutes-4940)

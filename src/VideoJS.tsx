@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js'
-import 'video.js/dist/video-js.css'
+// import 'video.js/dist/video-js.css'
 import { VideoProps } from './utils/interfaces'
 import './VideoJS.css'
 
