@@ -12,6 +12,7 @@ interface Props {
   height?: number,
   width?: number
   fluid?: boolean
+  fill?: boolean
 }
 
 function VidsPlusAds(props: Props) {
@@ -23,6 +24,7 @@ function VidsPlusAds(props: Props) {
       controls: true,
       responsive: true,
       fluid: props.fluid?? false,
+      fill: props.fill?? false,
       height: props.height?? window.innerHeight,
       width: props.width?? window.innerWidth,
       sources: [
@@ -54,11 +56,11 @@ function VidsPlusAds(props: Props) {
   const configs = { adFrequency: props.adFrequency, preroll: props.preroll }
 
   return (
-    <div>
+    <>
       <AdStateProvider>
         <VideoAdManager {...{ videoProps, adProps, configs }} />
       </AdStateProvider>
-    </div>
+    </>
   )
 }
 
