@@ -8,10 +8,10 @@ import VideoJS from './VideoJS'
 
 interface Props {
   videoProps: VideoProps
-  adProps: VideoProps
+  adProps?: VideoProps
   configs: {
     preroll?: boolean
-    adFrequency: number
+    adFrequency?: number
   }
 }
 
@@ -20,12 +20,11 @@ const VideoAdManager = ({ videoProps, adProps, configs }: Props) => {
   const adRef = useRef<VideoJsPlayer | null>(null)
   const [currentTime, setCurrentTime] = useState(-1)
   const [rerunWindow, setRerunWindow] = useState(configs.adFrequency)
-  const [adPreroll, setAdPreroll] = useState(configs.preroll?? true)
+  const [adPreroll, setAdPreroll] = useState(configs.preroll ?? true)
   const { adState, dispatchAdState } = useContext(AdStateContext)
 
   const videoPlayerReady = (player: VideoJsPlayer) => {
     videoProps.onReady()
-
     videoRef.current = player
     if (adState.lastEvent == AdEvents.Ended) {
       player.play()
@@ -36,8 +35,8 @@ const VideoAdManager = ({ videoProps, adProps, configs }: Props) => {
   }
 
   const adPlayerReady = (player: VideoJsPlayer) => {
+    if (adProps == undefined) return
     adProps.onReady()
-
     adRef.current = player
     // overlay elements
     let playingAd = document.createElement('div')
@@ -49,7 +48,6 @@ const VideoAdManager = ({ videoProps, adProps, configs }: Props) => {
       dispatchAdState(AdEvents.Ended)
     }
     player.el().appendChild(skipAdButton)
-
     // ad run settings
     player.playbackRate(3)
     player.on('dispose', () => {
@@ -63,7 +61,7 @@ const VideoAdManager = ({ videoProps, adProps, configs }: Props) => {
   }
 
   useEffect(() => {
-    if (currentTime == -1) return
+    if (!adProps || currentTime == -1) return
     switch (adState.lastEvent) {
       case AdEvents.DidNotPlay:
         if (adPreroll) {
@@ -93,13 +91,13 @@ const VideoAdManager = ({ videoProps, adProps, configs }: Props) => {
         options={videoProps.options}
         onReady={videoPlayerReady}
       />
-      {adState.lastEvent == AdEvents.Playing ? (
+      {adProps && adState.lastEvent == AdEvents.Playing && (
         <VideoAdHOC
           options={adProps.options}
           onReady={adPlayerReady}
           className="ad"
         />
-      ) : null}
+      ) }
       {/* <div className="settings">
         <label>
           Ad Run Frequency:

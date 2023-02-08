@@ -4,15 +4,38 @@ import VideoAdManager from './VideoAdManager'
 import { VideoProps } from './utils/interfaces'
 
 interface Props {
-  adFrequency: number
+  adFrequency?: number
   videoSource: string
-  adSource: string
+  adSource?: string
   preroll?: boolean
   thumbnail?: string
+  height?: number,
+  width?: number
+  fluid?: boolean
 }
 
 function VidsPlusAds(props: Props) {
-  const adProps: VideoProps = {
+  const videoProps: VideoProps = {
+    onReady: () => {},
+    options: {
+      poster: props.thumbnail,
+      autoplay: false,
+      controls: true,
+      responsive: true,
+      fluid: props.fluid?? false,
+      height: props.height?? window.innerHeight,
+      width: props.width?? window.innerWidth,
+      sources: [
+        {
+          // src: process.env.PUBLIC_URL + '/video.mp4',
+          src: props.videoSource,
+          type: 'video/mp4',
+        },
+      ],
+    },
+  }
+
+  const adProps: VideoProps | undefined = props.adSource? {
     onReady: () => {},
     options: {
       fluid: false,
@@ -26,26 +49,7 @@ function VidsPlusAds(props: Props) {
         },
       ],
     },
-  }
-
-  const videoProps: VideoProps = {
-    onReady: () => {},
-    options: {
-      poster: props.thumbnail,
-      autoplay: false,
-      controls: true,
-      responsive: true,
-      fluid: true,
-      height: window.innerHeight,
-      sources: [
-        {
-          // src: process.env.PUBLIC_URL + '/video.mp4',
-          src: props.videoSource,
-          type: 'video/mp4',
-        },
-      ],
-    },
-  }
+  }: undefined
 
   const configs = { adFrequency: props.adFrequency, preroll: props.preroll }
 
