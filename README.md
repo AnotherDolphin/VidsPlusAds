@@ -10,6 +10,7 @@ React video componnet library with in-built support for running video ads
 - Set whether you want the ad to preroll
 - Ads automatically adjust to your displayed video component dimensions regardless of ratio/size differences
 - _Skip Ad_ feature when ad is running
+- Can use as simple video player if no ad source was passed
 
 ## Installation
 
@@ -44,9 +45,34 @@ const adSource =
 
 ## Component Props
 
+\* *requried*
+
 Name | Type | Description
 --- | --- | ---
-adFrequency | number | The time in milliseconds between ad runs
-videoSource | string | Local path or URL source for main video content
+videoSource* | string | Local path or URL source for main video content
 adSource | string | Local path or URL source for video ad
+adFrequency | number | The time in milliseconds between ad runs
 preroll | boolean | Preroll ad upon video playback if true
+thumbnail | string | video thumbnail image source
+height | number | height of player in px
+width | number | width of player in px
+fluid | boolean | auto adjust player size
+
+
+
+## Component Methods
+
+ref | useRef() Obj | Can be used to programmatically trigger player methods/actions
+
+```tsx
+const ref = useRef()
+...
+
+<VidsPlusAds {...props}, ref={ref} />
+```
+
+### Methods
+- `ref.current.play()`
+  plays video
+- `ref.current.pause()`
+  pauses video

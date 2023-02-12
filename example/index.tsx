@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom';
 import VidsPlusAds from '../src';
 
 const App = () => {
+  const playerRef = React.useRef<any>(undefined)
   const options = {
     // adSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
     videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
@@ -13,7 +14,8 @@ const App = () => {
 
   return (
     <div>
-      <VidsPlusAds {...options} />
+      <VidsPlusAds {...options} ref={playerRef}/>
+      <button onClick={() => playerRef.current?.pause()}>Play</button>
     </div>
   );
 };

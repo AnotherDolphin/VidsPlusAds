@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef, useImperativeHandle } from 'react'
 import { useContext, useEffect, useRef, useState } from 'react'
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js'
 import { AdEvents, AdStateContext } from './utils/AdContext'
@@ -15,9 +15,21 @@ interface Props {
   }
 }
 
-const VideoAdManager = ({ videoProps, adProps, configs }: Props) => {
+const VideoAdManager = ({ videoProps, adProps, configs }: Props, ref: React.Ref<unknown> | undefined) => {
   const videoRef = useRef<VideoJsPlayer | null>(null)
   const adRef = useRef<VideoJsPlayer | null>(null)
+
+  useImperativeHandle(ref, () => {
+    return {
+      play: () => {
+        videoRef.current?.play()
+      },
+      pause: () => {
+        videoRef.current?.pause()
+      },
+    }
+  })
+
   const [currentTime, setCurrentTime] = useState(-1)
   const [rerunWindow, setRerunWindow] = useState(configs.adFrequency)
   const [adPreroll, setAdPreroll] = useState(configs.preroll ?? true)
@@ -97,7 +109,7 @@ const VideoAdManager = ({ videoProps, adProps, configs }: Props) => {
           onReady={adPlayerReady}
           className="ad"
         />
-      ) }
+      )}
       {/* <div className="settings">
         <label>
           Ad Run Frequency:
@@ -120,4 +132,4 @@ const VideoAdManager = ({ videoProps, adProps, configs }: Props) => {
   )
 }
 
-export default VideoAdManager
+export default forwardRef(VideoAdManager)
