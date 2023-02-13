@@ -17,17 +17,6 @@ interface Props {
 }
 
 function VidsPlusAds(props: Props, ref: React.Ref<unknown> | undefined) {
-  const playerRef = useRef<any>(undefined)
-  useImperativeHandle(ref, () => {
-    return {
-      play: () => {
-        playerRef.current?.play()
-      },
-      pause: () => {
-        playerRef.current?.pause()
-      },
-    }
-  })
 
   const videoProps: VideoProps = {
     onReady: () => {},
@@ -73,7 +62,7 @@ function VidsPlusAds(props: Props, ref: React.Ref<unknown> | undefined) {
   return (
     <>
       <AdStateProvider>
-        <VideoAdManager {...{ videoProps, adProps, configs }} ref={playerRef} />
+        <VideoAdManager {...{ videoProps, adProps, configs }} ref={ref} />
       </AdStateProvider>
     </>
   )

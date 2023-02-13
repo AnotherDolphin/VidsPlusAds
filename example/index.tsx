@@ -1,23 +1,32 @@
-import 'react-app-polyfill/ie11';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import VidsPlusAds from '../src';
+import 'react-app-polyfill/ie11'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import VidsPlusAds from '../src'
+import { IPlayerHandler } from '../src/utils/interfaces'
 
 const App = () => {
-  const playerRef = React.useRef<any>(undefined)
+  const playerRef = React.useRef<IPlayerHandler | undefined>(undefined)
   const options = {
     // adSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
-    videoSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+    videoSource:
+      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
     adFrequency: 3000,
-    preroll: true
+    preroll: true,
   }
 
   return (
     <div>
-      <VidsPlusAds {...options} ref={playerRef}/>
-      <button onClick={() => playerRef.current?.pause()}>Play</button>
+      <VidsPlusAds {...options} ref={playerRef} />
+      <button
+        onClick={() => {
+          playerRef.current?.togglePlay()
+          console.log(playerRef.current?.currentTime())
+        }}
+      >
+        Play
+      </button>
     </div>
-  );
-};
+  )
+}
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))

@@ -66,7 +66,7 @@ ref | useRef() Obj | Can be used to programmatically trigger player methods/acti
 
 ```tsx
 const ref = useRef()
-...
+// ...
 
 <VidsPlusAds {...props}, ref={ref} />
 ```
@@ -76,3 +76,15 @@ const ref = useRef()
   plays video
 - `ref.current.pause()`
   pauses video
+- `ref.current.togglePlay()`
+  toggles play/pause
+- `ref.current.duration()`
+  returns video duration in seconds
+- `ref.current.currentTime()`
+  returns current video time in seconds
+- `ref.current.paused()`
+  returns true if video is paused
+- `ref.current.ended()`
+  returns true if video has ended
+- `ref.current.muted()`
+  returns true if video is muted
