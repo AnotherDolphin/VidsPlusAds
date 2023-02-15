@@ -57,6 +57,7 @@ thumbnail | string | video thumbnail image source
 height | number | height of player in px
 width | number | width of player in px
 fluid | boolean | auto adjust player size
+onPlay | function | callback when palyer starts/resumes
 
 
 
@@ -68,7 +69,7 @@ ref | useRef() Obj | Can be used to programmatically trigger player methods/acti
 const ref = useRef()
 // ...
 
-<VidsPlusAds {...props}, ref={ref} />
+<VidsPlusAds {...props} ref={ref} />
 ```
 
 ### Methods

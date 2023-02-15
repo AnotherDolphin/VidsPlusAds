@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react'
 import AdStateProvider from './utils/AdContext'
 import VideoAdManager from './VideoAdManager'
-import { VideoProps } from './utils/interfaces'
+import { IPlayerHandler, VideoProps } from './utils/interfaces'
 
 interface Props {
   adFrequency?: number
@@ -13,10 +13,11 @@ interface Props {
   width?: number
   fluid?: boolean
   fill?: boolean
+  onPlay?: Function
   // ref? : React.Ref<unknown> | undefined
 }
 
-function VidsPlusAds(props: Props, ref: React.Ref<unknown> | undefined) {
+function VidsPlusAds(props: Props, ref: React.Ref<IPlayerHandler> | undefined) {
 
   const videoProps: VideoProps = {
     onReady: () => {},
@@ -58,11 +59,11 @@ function VidsPlusAds(props: Props, ref: React.Ref<unknown> | undefined) {
     : undefined
 
   const configs = { adFrequency: props.adFrequency, preroll: props.preroll }
-
+  const onPlay = props.onPlay
   return (
     <>
       <AdStateProvider>
-        <VideoAdManager {...{ videoProps, adProps, configs }} ref={ref} />
+        <VideoAdManager {...{ videoProps, adProps, configs, onPlay }} ref={ref} />
       </AdStateProvider>
     </>
   )

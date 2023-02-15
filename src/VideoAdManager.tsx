@@ -9,6 +9,7 @@ import VideoJS from './VideoJS'
 interface Props {
   videoProps: VideoProps
   adProps?: VideoProps
+  onPlay?: Function
   configs: {
     preroll?: boolean
     adFrequency?: number
@@ -16,8 +17,8 @@ interface Props {
 }
 
 const VideoAdManager = (
-  { videoProps, adProps, configs }: Props,
-  ref: React.Ref<unknown> | undefined
+  { videoProps, adProps, configs, onPlay = () => {} }: Props,
+  ref: React.Ref<IPlayerHandler> | undefined
 ) => {
   const videoRef = useRef<VideoJsPlayer | null>(null)
   const adRef = useRef<VideoJsPlayer | null>(null)
@@ -56,6 +57,7 @@ const VideoAdManager = (
 
   const videoPlayerReady = (player: VideoJsPlayer) => {
     videoProps.onReady()
+    player.on('play', () => onPlay())
     videoRef.current = player
     if (adState.lastEvent == AdEvents.Ended) {
       player.play()
@@ -64,6 +66,8 @@ const VideoAdManager = (
       setCurrentTime(0)
     })
   }
+
+  // player click event
 
   const adPlayerReady = (player: VideoJsPlayer) => {
     if (adProps == undefined) return

@@ -12,11 +12,18 @@ const App = () => {
       'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
     adFrequency: 3000,
     preroll: true,
+    onPlay: () => {
+      console.log('onPlay')
+    },
+    // fluid: true,
+    fill: true,
   }
 
   return (
     <div>
-      <VidsPlusAds {...options} ref={playerRef} />
+      <div style={{height: 200, width:200}}>
+        <VidsPlusAds {...options} ref={playerRef} />
+      </div>
       <button
         onClick={() => {
           playerRef.current?.togglePlay()
