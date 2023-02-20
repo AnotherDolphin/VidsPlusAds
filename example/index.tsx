@@ -15,6 +15,10 @@ const App = () => {
     onPlay: () => {
       console.log('onPlay')
     },
+    onLoadedMetaData: () => {
+      console.log(playerRef.current?.duration())
+      // console.log('wer')
+    },
     // fluid: true,
     fill: true,
   }

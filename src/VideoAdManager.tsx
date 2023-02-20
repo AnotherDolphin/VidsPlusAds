@@ -10,6 +10,7 @@ interface Props {
   videoProps: VideoProps
   adProps?: VideoProps
   onPlay?: Function
+  onLoadedMetaData?: Function
   configs: {
     preroll?: boolean
     adFrequency?: number
@@ -17,7 +18,13 @@ interface Props {
 }
 
 const VideoAdManager = (
-  { videoProps, adProps, configs, onPlay = () => {} }: Props,
+  {
+    videoProps,
+    adProps,
+    configs,
+    onPlay = () => {},
+    onLoadedMetaData = () => {},
+  }: Props,
   ref: React.Ref<IPlayerHandler> | undefined
 ) => {
   const videoRef = useRef<VideoJsPlayer | null>(null)
@@ -56,6 +63,7 @@ const VideoAdManager = (
   const { adState, dispatchAdState } = useContext(AdStateContext)
 
   const videoPlayerReady = (player: VideoJsPlayer) => {
+    player.on('loadedmetadata', () => onLoadedMetaData())
     videoProps.onReady()
     player.on('play', () => onPlay())
     videoRef.current = player

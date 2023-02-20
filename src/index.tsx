@@ -14,6 +14,7 @@ interface Props {
   fluid?: boolean
   fill?: boolean
   onPlay?: Function
+  onLoadedMetaData?: Function
   // ref? : React.Ref<unknown> | undefined
 }
 
@@ -59,11 +60,11 @@ function VidsPlusAds(props: Props, ref: React.Ref<IPlayerHandler> | undefined) {
     : undefined
 
   const configs = { adFrequency: props.adFrequency, preroll: props.preroll }
-  const onPlay = props.onPlay
+  const {onPlay, onLoadedMetaData} = props
   return (
     <>
       <AdStateProvider>
-        <VideoAdManager {...{ videoProps, adProps, configs, onPlay }} ref={ref} />
+        <VideoAdManager {...{ videoProps, adProps, configs, onPlay, onLoadedMetaData }} ref={ref} />
       </AdStateProvider>
     </>
   )
