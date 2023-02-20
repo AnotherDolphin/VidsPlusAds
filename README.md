@@ -58,6 +58,7 @@ height | number | height of player in px
 width | number | width of player in px
 fluid | boolean | auto adjust player size
 onPlay | function | callback when palyer starts/resumes
+onLoadedMetaData | function | callback when video metadata is loaded
 
 
 
