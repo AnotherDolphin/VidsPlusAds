@@ -59,6 +59,7 @@ width | number | width of player in px
 fluid | boolean | auto adjust player size
 onPlay | function | callback when palyer starts/resumes
 onLoadedMetaData | function | callback when video metadata is loaded
+overlayChild | React.Node | element to be displayed on top of video
 
 
 

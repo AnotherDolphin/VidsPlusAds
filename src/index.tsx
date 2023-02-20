@@ -4,10 +4,8 @@ import VideoAdManager from './VideoAdManager'
 import { IPlayerHandler, VideoProps } from './utils/interfaces'
 
 interface Props {
-  adFrequency?: number
   videoSource: string
   adSource?: string
-  preroll?: boolean
   thumbnail?: string
   height?: number
   width?: number
@@ -15,11 +13,13 @@ interface Props {
   fill?: boolean
   onPlay?: Function
   onLoadedMetaData?: Function
+  overlayChild?: React.ReactNode
+  adFrequency?: number
+  preroll?: boolean
   // ref? : React.Ref<unknown> | undefined
 }
 
 function VidsPlusAds(props: Props, ref: React.Ref<IPlayerHandler> | undefined) {
-
   const videoProps: VideoProps = {
     onReady: () => {},
     options: {
@@ -60,11 +60,14 @@ function VidsPlusAds(props: Props, ref: React.Ref<IPlayerHandler> | undefined) {
     : undefined
 
   const configs = { adFrequency: props.adFrequency, preroll: props.preroll }
-  const {onPlay, onLoadedMetaData} = props
+  const { onPlay, onLoadedMetaData, overlayChild } = props
   return (
     <>
       <AdStateProvider>
-        <VideoAdManager {...{ videoProps, adProps, configs, onPlay, onLoadedMetaData }} ref={ref} />
+        <VideoAdManager
+          {...{ videoProps, adProps, configs, onPlay, onLoadedMetaData, overlayChild }}
+          ref={ref}
+        />
       </AdStateProvider>
     </>
   )

@@ -6,6 +6,7 @@ import { IPlayerHandler } from '../src/utils/interfaces'
 
 const App = () => {
   const playerRef = React.useRef<IPlayerHandler | undefined>(undefined)
+  const [overlay, setOverlay] = React.useState(<div style={{marginTop: 100, right: 0}}>Overlay</div>)
   const options = {
     // adSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
     videoSource:
@@ -14,6 +15,7 @@ const App = () => {
     preroll: true,
     onPlay: () => {
       console.log('onPlay')
+      setOverlay(<></>)
     },
     onLoadedMetaData: () => {
       console.log(playerRef.current?.duration())
@@ -21,6 +23,7 @@ const App = () => {
     },
     // fluid: true,
     fill: true,
+    overlayChild: overlay,
   }
 
   return (

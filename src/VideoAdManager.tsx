@@ -11,6 +11,7 @@ interface Props {
   adProps?: VideoProps
   onPlay?: Function
   onLoadedMetaData?: Function
+  overlayChild?: React.ReactNode
   configs: {
     preroll?: boolean
     adFrequency?: number
@@ -22,6 +23,7 @@ const VideoAdManager = (
     videoProps,
     adProps,
     configs,
+    overlayChild,
     onPlay = () => {},
     onLoadedMetaData = () => {},
   }: Props,
@@ -129,6 +131,7 @@ const VideoAdManager = (
 
   return (
     <div className="screen">
+      {overlayChild && <div className="overlay">{overlayChild}</div>}
       <VideoJS
         // key={adState.lastEvent}
         options={videoProps.options}
