@@ -1,6 +1,6 @@
 # VidsPlusAds
 
-React video componnet library with in-built support for running video ads
+React video component library with in-built support for running video ads
 
 ### Integrate ads in your videos without hassle
 
@@ -57,8 +57,9 @@ thumbnail | string | video thumbnail image source
 height | number | height of player in px
 width | number | width of player in px
 fluid | boolean | auto adjust player size
-onPlay | function | callback when palyer starts/resumes
+onPlay | function | callback when player starts/resumes
 onLoadedMetaData | function | callback when video metadata is loaded
+onPause | function | callback when player is paused
 overlayChild | React.Node | element to be displayed on top of video
 
 

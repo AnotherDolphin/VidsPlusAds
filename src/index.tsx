@@ -12,6 +12,7 @@ interface Props {
   fluid?: boolean
   fill?: boolean
   onPlay?: Function
+  onPause?: Function
   onLoadedMetaData?: Function
   overlayChild?: React.ReactNode
   adFrequency?: number
@@ -60,12 +61,12 @@ function VidsPlusAds(props: Props, ref: React.Ref<IPlayerHandler> | undefined) {
     : undefined
 
   const configs = { adFrequency: props.adFrequency, preroll: props.preroll }
-  const { onPlay, onLoadedMetaData, overlayChild } = props
+  const { onPlay, onLoadedMetaData, overlayChild, onPause } = props
   return (
     <>
       <AdStateProvider>
         <VideoAdManager
-          {...{ videoProps, adProps, configs, onPlay, onLoadedMetaData, overlayChild }}
+          {...{ videoProps, adProps, configs, onPlay, onLoadedMetaData, onPause, overlayChild }}
           ref={ref}
         />
       </AdStateProvider>

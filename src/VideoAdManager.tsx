@@ -11,6 +11,7 @@ interface Props {
   adProps?: VideoProps
   onPlay?: Function
   onLoadedMetaData?: Function
+  onPause?: Function
   overlayChild?: React.ReactNode
   configs: {
     preroll?: boolean
@@ -26,6 +27,7 @@ const VideoAdManager = (
     overlayChild,
     onPlay = () => {},
     onLoadedMetaData = () => {},
+    onPause = () => {},
   }: Props,
   ref: React.Ref<IPlayerHandler> | undefined
 ) => {
@@ -66,8 +68,9 @@ const VideoAdManager = (
 
   const videoPlayerReady = (player: VideoJsPlayer) => {
     player.on('loadedmetadata', () => onLoadedMetaData())
-    videoProps.onReady()
     player.on('play', () => onPlay())
+    player.on('pause', () => onPause())
+    videoProps.onReady()
     videoRef.current = player
     if (adState.lastEvent == AdEvents.Ended) {
       player.play()
@@ -75,6 +78,7 @@ const VideoAdManager = (
     player.on('play', () => {
       setCurrentTime(0)
     })
+    
   }
 
   // player click event

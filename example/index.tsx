@@ -21,6 +21,10 @@ const App = () => {
       console.log(playerRef.current?.duration())
       // console.log('wer')
     },
+    onPause: () => {
+      console.log('onPause')
+      setOverlay(<div style={{marginTop: 100, right: 0}}>Overlay</div>)
+    },
     // fluid: true,
     fill: true,
     overlayChild: overlay,
