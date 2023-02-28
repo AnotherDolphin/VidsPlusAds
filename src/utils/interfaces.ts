@@ -6,6 +6,8 @@ export interface VideoProps {
   className?: string
 }
 
+// export interface asdf as VideoJsPlayerOptions
+
 export interface IPlayerHandler {
   play: () => void
   pause: () => void

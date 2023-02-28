@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 import AdStateProvider from './utils/AdContext'
 import VideoAdManager from './VideoAdManager'
 import { IPlayerHandler, VideoProps } from './utils/interfaces'
@@ -21,6 +21,11 @@ interface Props {
 }
 
 function VidsPlusAds(props: Props, ref: React.Ref<IPlayerHandler> | undefined) {
+  useEffect(() => {
+    videoProps.options.height = props.height ?? window.innerHeight
+    videoProps.options.width = props.width ?? window.innerWidth
+  }, [])
+
   const videoProps: VideoProps = {
     onReady: () => {},
     options: {
@@ -30,8 +35,8 @@ function VidsPlusAds(props: Props, ref: React.Ref<IPlayerHandler> | undefined) {
       responsive: true,
       fluid: props.fluid ?? false,
       fill: props.fill ?? false,
-      height: props.height ?? window.innerHeight,
-      width: props.width ?? window.innerWidth,
+      // height: props.height ?? window.innerHeight,
+      // width: props.width ?? window.innerWidth,
       sources: [
         {
           // src: process.env.PUBLIC_URL + '/video.mp4',
