@@ -17,6 +17,7 @@ interface Props {
   overlayChild?: React.ReactNode
   adFrequency?: number
   preroll?: boolean
+  controls?: boolean
   // ref? : React.Ref<unknown> | undefined
 }
 
@@ -31,7 +32,7 @@ function VidsPlusAds(props: Props, ref: React.Ref<IPlayerHandler> | undefined) {
     options: {
       poster: props.thumbnail,
       autoplay: false,
-      controls: true,
+      controls: props.controls?? true,
       responsive: true,
       fluid: props.fluid ?? false,
       fill: props.fill ?? false,

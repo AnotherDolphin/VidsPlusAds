@@ -57,6 +57,7 @@ thumbnail | string | video thumbnail image source
 height | number | height of player in px
 width | number | width of player in px
 fluid | boolean | auto adjust player size
+controls | boolean | show video controls
 onPlay | function | callback when player starts/resumes
 onLoadedMetaData | function | callback when video metadata is loaded
 onPause | function | callback when player is paused

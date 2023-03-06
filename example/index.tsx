@@ -28,6 +28,7 @@ const App = () => {
     // fluid: true,
     fill: true,
     overlayChild: overlay,
+    controls: false
   }
 
   return (
