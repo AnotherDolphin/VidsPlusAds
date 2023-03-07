@@ -5,6 +5,7 @@ React video component library with in-built support for running video ads
 ### Integrate ads in your videos without hassle
 
 - Easy configuration with simple props
+- (*New v1*) Supports all [VideoJS](https://docs.videojs.com/player) methods
 - Written in TS for type filling and parametr diagnosis
 - Set how often you want the ad to run
 - Set whether you want the ad to preroll
@@ -76,20 +77,35 @@ const ref = useRef()
 <VidsPlusAds {...props} ref={ref} />
 ```
 
-### Methods
-- `ref.current.play()`
+### Core Methods
+
+All Video Player methods supported by [VideoJS](https://docs.videojs.com/player) are accessible on any VidsPlusAds intance through
+the '*core*' prop on `ref.current`.
+
+examples:
+- `ref.current.core.play()`
   plays video
-- `ref.current.pause()`
+- `ref.current.core.pause()`
   pauses video
+- `ref.current.core.duration()`
+  returns video duration in seconds
+- `ref.current.core.currentTime()`
+  returns current video time in seconds
+- `ref.current.core.currentTime(seconds)`
+  sets current video time in seconds
+- `ref.current.core.paused()`
+  returns true if video is paused
+- `ref.current.core.ended()`
+  returns true if video has ended
+
+### Extended Methods
+
+Convenience methods with added functionality. Accessed directly with `ref.current`
+
 - `ref.current.togglePlay()`
   toggles play/pause
-- `ref.current.duration()`
-  returns video duration in seconds
-- `ref.current.currentTime()`
-  returns current video time in seconds
-- `ref.current.paused()`
-  returns true if video is paused
-- `ref.current.ended()`
-  returns true if video has ended
-- `ref.current.muted()`
-  returns true if video is muted
+
+## Migration
+version 1.0.0+ added support for all VideoJS methods.
+
+To migrate from version 0 to 1 install the new version and covert any *core* method calls on `ref.current` to `ref.current.core` instead.

@@ -1,4 +1,4 @@
-import { VideoJsPlayerOptions } from "video.js"
+import { VideoJsPlayer, VideoJsPlayerOptions } from "video.js"
 
 export interface VideoProps {
   options: VideoJsPlayerOptions
@@ -8,13 +8,15 @@ export interface VideoProps {
 
 // export interface asdf as VideoJsPlayerOptions
 
-export interface IPlayerHandler {
-  play: () => void
-  pause: () => void
+export interface IVideoHandler {
+  // play: () => void
+  // pause: () => void
   togglePlay: () => void
-  currentTime: () => number | undefined
-  duration: () => number | undefined
-  paused: () => boolean | undefined
-  ended: () => boolean | undefined
-  muted: () => boolean | undefined
+  core: VideoJsPlayer | null
+  // currentTime: (seconds: number) => number | undefined
+  // currentTime: () => number | undefined
+  // duration: () => number | undefined
+  // paused: () => boolean | undefined
+  // ended: () => boolean | undefined
+  // muted: () => boolean | undefined
 }

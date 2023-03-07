@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 import AdStateProvider from './utils/AdContext'
 import VideoAdManager from './VideoAdManager'
-import { IPlayerHandler, VideoProps } from './utils/interfaces'
+import { IVideoHandler, VideoProps } from './utils/interfaces'
 
 interface Props {
   videoSource: string
@@ -21,7 +21,7 @@ interface Props {
   // ref? : React.Ref<unknown> | undefined
 }
 
-function VidsPlusAds(props: Props, ref: React.Ref<IPlayerHandler> | undefined) {
+function VidsPlusAds(props: Props, ref: React.Ref<IVideoHandler> | undefined) {
   useEffect(() => {
     videoProps.options.height = props.height ?? window.innerHeight
     videoProps.options.width = props.width ?? window.innerWidth

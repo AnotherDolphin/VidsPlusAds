@@ -2,10 +2,10 @@ import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import VidsPlusAds from '../src'
-import { IPlayerHandler } from '../src/utils/interfaces'
+import { IVideoHandler } from '../src/utils/interfaces'
 
 const App = () => {
-  const playerRef = React.useRef<IPlayerHandler | undefined>(undefined)
+  const playerRef = React.useRef<IVideoHandler | undefined>(undefined)
   const [overlay, setOverlay] = React.useState(<div style={{marginTop: 100, right: 0}}>Overlay</div>)
   const options = {
     // adSource: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
@@ -18,7 +18,7 @@ const App = () => {
       setOverlay(<></>)
     },
     onLoadedMetaData: () => {
-      console.log(playerRef.current?.duration())
+      console.log(playerRef.current?.core?.duration())
       // console.log('wer')
     },
     onPause: () => {
@@ -39,7 +39,7 @@ const App = () => {
       <button
         onClick={() => {
           playerRef.current?.togglePlay()
-          console.log(playerRef.current?.currentTime())
+          console.log(playerRef.current?.core?.currentTime())
         }}
       >
         Play

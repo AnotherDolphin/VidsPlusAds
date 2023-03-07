@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle } from 'react'
 import { useContext, useEffect, useRef, useState } from 'react'
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js'
 import { AdEvents, AdStateContext } from './utils/AdContext'
-import { IPlayerHandler, VideoProps } from './utils/interfaces'
+import { IVideoHandler, VideoProps } from './utils/interfaces'
 import { VideoAdHOC } from './VideoAdHOC'
 import VideoJS from './VideoJS'
 
@@ -29,21 +29,16 @@ const VideoAdManager = (
     onLoadedMetaData = () => {},
     onPause = () => {},
   }: Props,
-  ref: React.Ref<IPlayerHandler> | undefined
+  ref: React.Ref<IVideoHandler | null> | undefined
 ) => {
   const videoRef = useRef<VideoJsPlayer | null>(null)
   const adRef = useRef<VideoJsPlayer | null>(null)
 
   useImperativeHandle(
     ref,
-    (): IPlayerHandler => {
+    (): IVideoHandler => {
       return {
-        play: () => {
-          videoRef.current?.play()
-        },
-        pause: () => {
-          videoRef.current?.pause()
-        },
+        core: videoRef.current,
         togglePlay: () => {
           videoRef.current?.currentTime &&
           videoRef.current?.currentTime() > 0 &&
@@ -52,11 +47,6 @@ const VideoAdManager = (
             ? videoRef.current?.pause()
             : videoRef.current?.play()
         },
-        currentTime: () => videoRef.current?.currentTime(),
-        duration: () => videoRef.current?.duration(),
-        paused: () => videoRef.current?.paused(),
-        ended: () => videoRef.current?.ended(),
-        muted: () => videoRef.current?.muted(),
       }
     }
   )
@@ -78,7 +68,6 @@ const VideoAdManager = (
     player.on('play', () => {
       setCurrentTime(0)
     })
-    
   }
 
   // player click event
