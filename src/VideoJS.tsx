@@ -31,7 +31,6 @@ export const VideoJS = (props: VideoProps) => {
       const player = playerRef.current
       // player.autoplay(options.autoplay ?? false)
       // player.src(options.sources!)
-      console.log('refreshed')
     }
   }, [options, videoRef])
 

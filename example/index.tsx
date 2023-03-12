@@ -16,10 +16,12 @@ const App = () => {
     onPlay: () => {
       console.log('onPlay')
       setOverlay(<></>)
+      console.log(playerRef.current?.core?.duration())
+
     },
     onLoadedMetaData: () => {
       console.log(playerRef.current?.core?.duration())
-      // console.log('wer')
+
     },
     onPause: () => {
       console.log('onPause')

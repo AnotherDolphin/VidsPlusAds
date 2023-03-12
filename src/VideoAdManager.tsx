@@ -1,4 +1,10 @@
-import React, { forwardRef, useImperativeHandle } from 'react'
+import React, {
+  forwardRef,
+  MutableRefObject,
+  useCallback,
+  useImperativeHandle,
+  useReducer,
+} from 'react'
 import { useContext, useEffect, useRef, useState } from 'react'
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js'
 import { AdEvents, AdStateContext } from './utils/AdContext'
@@ -33,12 +39,26 @@ const VideoAdManager = (
 ) => {
   const videoRef = useRef<VideoJsPlayer | null>(null)
   const adRef = useRef<VideoJsPlayer | null>(null)
+  const [core, setCore] = useState<VideoJsPlayer | null>(null)
+  // const [videoRef, setVideoRef] = useReducer(
+  //   (
+  //     _videoRef: MutableRefObject<VideoJsPlayer | null>,
+  //     player: VideoJsPlayer
+  //   ) => {
+  //     const temp = useRef<VideoJsPlayer | null>(null)
+  //     temp.current = player
+  //     console.log('temp', temp)
 
+  //     return temp
+  //   },
+  //   useRef<VideoJsPlayer | null>(null)
+  // )
+  
   useImperativeHandle(
     ref,
     (): IVideoHandler => {
       return {
-        core: videoRef.current,
+        core: core,
         togglePlay: () => {
           videoRef.current?.currentTime &&
           videoRef.current?.currentTime() > 0 &&
@@ -48,7 +68,8 @@ const VideoAdManager = (
             : videoRef.current?.play()
         },
       }
-    }
+    },
+    [core]
   )
 
   const [currentTime, setCurrentTime] = useState(-1)
@@ -62,6 +83,7 @@ const VideoAdManager = (
     player.on('pause', () => onPause())
     videoProps.onReady()
     videoRef.current = player
+    setCore(player)
     if (adState.lastEvent == AdEvents.Ended) {
       player.play()
     }
